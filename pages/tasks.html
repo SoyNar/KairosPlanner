@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 fw-bold m-0">Tareas</h1>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#task-modal">
+    + Crear Tarea
+  </button>
+</div>
+
+<div id="task-list" class="card"></div>
+
+<!-- Modal: formulario de nueva tarea -->
+<div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="task-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="task-modal-title">Nueva tarea</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="task-form" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input id="name" name="name" type="text" class="form-control" maxlength="100" required>
+            <div class="invalid-feedback">Escribe el nombre de la tarea.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea id="description" name="description" class="form-control" rows="3" maxlength="500" required></textarea>
+            <div class="invalid-feedback">Agrega una descripción.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="assignedTo" class="form-label">Asignado a</label>
+            <input id="assignedTo" name="assignedTo" type="text" class="form-control" maxlength="80" required>
+            <div class="invalid-feedback">Indica a quién se asigna.</div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12 col-sm-6">
+              <label for="dueDate" class="form-label">Fecha de entrega</label>
+              <input id="dueDate" name="dueDate" type="date" class="form-control" required>
+              <div class="invalid-feedback">Elige una fecha desde hoy.</div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label for="status" class="form-label">Estado</label>
+              <select id="status" name="status" class="form-select"  required>
+                 <option value="" selected disabled>Selecciona un estado</option>
+                <option >Pendiente</option>
+                <option>En progreso</option>
+                <option>Completada</option>
+              </select>
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
+          <p id="form-error" class="text-danger small mt-3 mb-0" role="alert"></p>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" form="task-form" class="btn btn-primary">Guardar tarea</button>
+      </div>
+    </div>
+  </div>
+</div>
