@@ -44,11 +44,13 @@
             </div>
             <div class="col-12 col-sm-6">
               <label for="status" class="form-label">Estado</label>
-              <select id="status" name="status" class="form-select" required>
-                <option>Pendiente</option>
+              <select id="status" name="status" class="form-select"  required>
+                 <option value="" selected disabled>Selecciona un estado</option>
+                <option >Pendiente</option>
                 <option>En progreso</option>
                 <option>Completada</option>
               </select>
+              <div class="invalid-feedback"></div>
             </div>
           </div>
 
