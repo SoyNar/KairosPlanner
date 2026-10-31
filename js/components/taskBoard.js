@@ -16,6 +16,14 @@ const MOOD = {
   "Completada": "done",
 };
 
+// true cuando la pantalla es de celular (menos de 768px)
+export const mobileQuery = window.matchMedia("(max-width: 991.98px)");
+// filtro activo de la vista movil: "all" o uno de STATUSES
+let activeFilter = "all";
+export function setTaskFilter(value) {
+  activeFilter = value;
+}
+
 /**
  * Texto y clase css de la fecha de entrega (vencida, hoy o normal)
  */
@@ -30,9 +38,10 @@ function dueInfo(dueDate, status) {
 /**
  * metodo que recibe una tarea y devuelve el html de su card como texto
  * @param {object} t
+ * @param {boolean} showStatus muestra el badge de estado (vista lista en movil)
  * @returns {string}
  */
-function taskCard(t) {
+function taskCard(t, showStatus = false) {
   const due = dueInfo(t.dueDate, t.status);
   return `
     <article class="task-card task-card--${STATUS_CLASS[t.status] ?? "pending"}"
@@ -41,6 +50,7 @@ function taskCard(t) {
 
       <div class="d-flex justify-content-between align-items-center gap-3">
         <div class="task-meta">
+          ${showStatus ? `<span class="task-badge">${escapeHTML(t.status)}</span>` : ""}
           <span><i class="bi bi-person"></i> ${escapeHTML(t.assignedTo)}</span>
           <span class="${due.cls}"><i class="bi bi-calendar-event"></i> ${escapeHTML(due.text)}</span>
         </div>
@@ -52,7 +62,7 @@ function taskCard(t) {
 }
 
 /**
- * Estado vacio de una columna: Kai con la cara de ese estado
+ * Estado vacio: Kai con la cara de ese estado
  */
 function emptyState(status) {
   return `
@@ -63,12 +73,48 @@ function emptyState(status) {
 }
 
 /**
- * Metodo para renderizar el tablero en columnas por estado
- * @param {HTMLElement} container donde se pinta
- * @param {object[]} tasks tareas a mostrar
+ * Vista movil: lista unica con chips para filtrar por estado.
+ * Orden: pendientes primero por fecha de entrega, completadas al final.
+ * @param {object[]} tasks
+ * @returns {string}
  */
-export function renderTasks(container, tasks) {
-  container.innerHTML = `
+function taskListView(tasks) {
+  const visible = tasks
+    .filter((t) => activeFilter === "all" || t.status === activeFilter)
+    .sort(
+      (a, b) =>
+        (a.status === "Completada") - (b.status === "Completada") ||
+        a.dueDate.localeCompare(b.dueDate)
+    );
+
+  const chips = ["all", ...STATUSES]
+    .map(
+      (s) => `
+    <button type="button" data-filter="${s}"
+            class="task-filter ${s === activeFilter ? "is-active" : ""}">
+      ${s === "all" ? "Todas" : s}
+    </button>`
+    )
+    .join("");
+
+  return `
+    <div class="task-filters">${chips}</div>
+    <div class="task-stack">
+      ${
+        visible.length
+          ? visible.map((t) => taskCard(t, true)).join("")
+          : emptyState(MOOD[activeFilter] ? activeFilter : "Pendiente")
+      }
+    </div>`;
+}
+
+/**
+ * Vista web: tablero en columnas por estado
+ * @param {object[]} tasks
+ * @returns {string}
+ */
+function taskBoardView(tasks) {
+  return `
     <div class="board">
       ${STATUSES.map((status) => {
         const items = tasks.filter((t) => t.status === status);
@@ -79,9 +125,21 @@ export function renderTasks(container, tasks) {
               <span class="board-count">${items.length}</span>
             </header>
             <div class="board-col-body">
-              ${items.length ? items.map(taskCard).join("") : emptyState(status)}
+              ${items.length ? items.map((t) => taskCard(t)).join("") : emptyState(status)}
             </div>
           </section>`;
       }).join("")}
     </div>`;
+}
+
+/**
+ * Metodo para renderizar las tareas:
+ * lista con filtros en movil, tablero por columnas en web
+ * @param {HTMLElement} container donde se pinta
+ * @param {object[]} tasks tareas a mostrar
+ */
+export function renderTasks(container, tasks) {
+  container.innerHTML = mobileQuery.matches
+    ? taskListView(tasks)
+    : taskBoardView(tasks);
 }

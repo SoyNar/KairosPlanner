@@ -1,5 +1,5 @@
 import { ManagerTask } from "../../services/ManagerTask.js";
-import { renderTasks } from "../components/taskBoard.js";
+import { renderTasks,mobileQuery,setTaskFilter } from "../components/taskBoard.js";
 import { withLoader } from "../../utils/loader.js"
 import { validateTaskForm, showErrors } from "./taskValidation.js";
 
@@ -21,6 +21,7 @@ export function initTasksPage() {
 
   // vuelve a pintar el tablero con lo que hay guardado
   const refresh = () => renderTasks(list, ManagerTask.getAll());
+  mobileQuery.addEventListener("change", refresh);
 
   // deja el formulario y el modal como nuevos
   function resetForm() {
@@ -50,6 +51,13 @@ export function initTasksPage() {
   }
 
   refresh();
+
+  list.addEventListener("click", (event) => {
+  const chip = event.target.closest("[data-filter]");
+  if (!chip) return;
+  setTaskFilter(chip.dataset.filter);
+  refresh();
+});
 
   // delegacion de eventos: un solo listener para todos los botones de la lista
   list.addEventListener("click", (event) => {

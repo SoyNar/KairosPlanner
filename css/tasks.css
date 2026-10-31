@@ -1,13 +1,18 @@
 /* ===== Card de tarea ===== */
-.task-card {
-  padding: 1rem 1.25rem;
-  background: var(--paper);
-  border: var(--bw) solid var(--ink);
-  border-radius: var(--r);
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+:root {
+  --bg: #FAFAF7;
+  --ink: #14131A;
+  --accent: #FF0A8C;
+  --pending: #FFD93B;
+  --progress: #C78BFF;
+  --done: #00E5A0;
+  --border: 2px solid var(--ink);
+  --shadow: 3px 3px 0 var(--ink);
 }
+
+.task-card { background: #fff; border: var(--border); border-radius: 12px; }
+.task-card:hover { box-shadow: var(--shadow); transform: translate(-1px, -1px); }
+.board-col__title::before { /* punto de color del estado */ }
 
 .task-card:hover {
   transform: translate(-2px, -2px);
