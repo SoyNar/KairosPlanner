@@ -1,35 +1,49 @@
 /* ===== Menú lateral (escritorio) ===== */
 .sidebar {
   width: 232px;
-  flex: none;            /* que no se encoja */
+  flex: none;
   min-height: 100vh;
   padding: 28px 18px;
-  background: #fff;
-  gap: 6px;              /* espacio entre enlaces (el aside ya es flex-column) */
+  background: var(--paper);
+  border-right: var(--bw) solid var(--ink);
+  gap: 8px;
 }
 
 .brand {
-  margin: 0 12px 22px;
-  font-size: 1.25rem;
-  color: #4B3FC4;
+  align-self: flex-start;
+  margin: 0 0 26px 4px;
+  padding: 8px 16px;
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  color: var(--ink);
+  background: var(--hot);
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  transform: rotate(-3deg);
 }
 
 .menu-link {
-  padding: 11px 14px;
-  border-radius: 12px;
-  color: #6A688F;
-  font-size: 0.9rem;
-  font-weight: 600;
+  padding: 10px 14px;
+  border: var(--bw) solid transparent;
+  border-radius: var(--r);
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 700;
   text-decoration: none;
+  transition: background 0.12s;
 }
 
 .menu-link:hover {
-  background: #F3F2FF;
+  background: var(--sky);
+  border-color: var(--ink);
 }
 
 .menu-link.active {
-  background: #ECEBFF;
-  color: #4B3FC4;
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--hot);
 }
 
 /* ===== Barra inferior (móvil) ===== */
@@ -39,36 +53,37 @@
   right: 0;
   bottom: 0;
   display: flex;
-  gap: 4px;
+  gap: 6px;
   padding: 8px 10px 14px;
-  background: #fff;
-  box-shadow: 0 -4px 18px rgba(91, 75, 214, 0.1);
+  background: var(--paper);
+  border-top: var(--bw) solid var(--ink);
 }
 
 .bottom-link {
-  flex: 1;               /* los 4 enlaces se reparten el ancho */
+  flex: 1;
   padding: 9px 0;
+  border: 2px solid transparent;
   border-radius: 12px;
-  color: #6A688F;
-  font-size: 0.75rem;
-  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 700;
   text-align: center;
   text-decoration: none;
 }
 
 .bottom-link.active {
-  background: #ECEBFF;
-  color: #4B3FC4;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 /* ===== Contenido principal ===== */
 .content {
-  min-width: 0;                    /* evita que el contenido ensanche la página */
-  padding-bottom: 90px !important; /* espacio para que la barra inferior no tape nada */
+  min-width: 0;
+  padding-bottom: 90px !important;
 }
 
 @media (min-width: 768px) {
   .content {
-    padding-bottom: 2rem !important; /* en escritorio ya no hay barra inferior */
+    padding-bottom: 2rem !important;
   }
 }

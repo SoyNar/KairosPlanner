@@ -45,9 +45,28 @@ export const ManagerTask = {
   remove(id){
     save(this.getAll().filter((t) => t.id !== id));
   },
+  /**
+ * Metodo para mover una tarea a otra columna y/o a una posicion
+ * @param {string} id la tarea que se mueve
+ * @param {string} status el estado (columna) de destino
+ * @param {string|null} beforeId id de la tarea ANTES de la cual queda; null = al final
+ */
+move(id, status, beforeId = null) {
+    console.log("move llamado:", id, status, beforeId);
+  const tasks = this.getAll();
+  const from = tasks.findIndex((t) => t.id === id);
+  if (from === -1) return;
 
+  const [task] = tasks.splice(from, 1);   // 1. sacarla de donde estaba
+  task.status = status;                   // 2. cambiarle el estado
 
-  
+  const to = beforeId ? tasks.findIndex((t) => t.id === beforeId) : -1;
+    console.log("indice encontrado:", from);
+  if (to === -1) tasks.push(task);        // 3a. sin referencia: al final
+  else tasks.splice(to, 0, task);         // 3b. con referencia: justo antes
+
+  save(tasks);                            // 4. persistir
+},  
 
   
 /**

@@ -1,4 +1,5 @@
 import { escapeHTML } from "../../utils/html.js";
+import { mascotSVG } from "../../utils/mascot.js";
 
 // clase css por estado
 const STATUS_CLASS = {
@@ -7,6 +8,13 @@ const STATUS_CLASS = {
   "Completada": "done",
 };
 const STATUSES = ["Pendiente", "En progreso", "Completada"];
+
+// cara de Kai por estado (coincide con las claves de STATUS_CLASS)
+const MOOD = {
+  "Pendiente": "pending",
+  "En progreso": "progress",
+  "Completada": "done",
+};
 
 /**
  * Texto y clase css de la fecha de entrega (vencida, hoy o normal)
@@ -28,16 +36,10 @@ function taskCard(t) {
   const due = dueInfo(t.dueDate, t.status);
   return `
     <article class="task-card task-card--${STATUS_CLASS[t.status] ?? "pending"}"
-             data-action="edit" data-id="${t.id}" tabindex="0">
-      <div class="d-flex justify-content-between align-items-start gap-3">
-        <h2 class="task-title">${escapeHTML(t.name)}</h2>
-        <select class="task-badge task-status" data-action="status" data-id="${t.id}" aria-label="Cambiar estado">
-          ${STATUSES.map((s) => `<option value="${s}" ${s === t.status ? "selected" : ""}>${s}</option>`).join("")}
-        </select>
-      </div>
+             data-action="edit" data-id="${t.id}" tabindex="0" draggable="true">
+      <h2 class="task-title">${escapeHTML(t.name)}</h2>
 
-
-      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div class="d-flex justify-content-between align-items-center gap-3">
         <div class="task-meta">
           <span><i class="bi bi-person"></i> ${escapeHTML(t.assignedTo)}</span>
           <span class="${due.cls}"><i class="bi bi-calendar-event"></i> ${escapeHTML(due.text)}</span>
@@ -47,6 +49,17 @@ function taskCard(t) {
         </div>
       </div>
     </article>`;
+}
+
+/**
+ * Estado vacio de una columna: Kai con la cara de ese estado
+ */
+function emptyState(status) {
+  return `
+    <div class="board-empty">
+      ${mascotSVG(MOOD[status], { size: 72 })}
+      <p class="m-0">Sin tareas</p>
+    </div>`;
 }
 
 /**
@@ -60,15 +73,13 @@ export function renderTasks(container, tasks) {
       ${STATUSES.map((status) => {
         const items = tasks.filter((t) => t.status === status);
         return `
-          <section class="board-col board-col--${STATUS_CLASS[status]}">
+          <section class="board-col board-col--${STATUS_CLASS[status]}" data-status="${status}">
             <header class="board-col-header">
               <h2 class="board-col-title">${status}</h2>
               <span class="board-count">${items.length}</span>
             </header>
             <div class="board-col-body">
-              ${items.length
-                ? items.map(taskCard).join("")
-                : `<p class="board-empty">Sin tareas</p>`}
+              ${items.length ? items.map(taskCard).join("") : emptyState(status)}
             </div>
           </section>`;
       }).join("")}

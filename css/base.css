@@ -1,25 +1,101 @@
-/* ===== Colores y fuente (sobrescriben las variables de Bootstrap) ===== */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap");
+
+/* ===== Tokens y variables de Bootstrap ===== */
 :root {
-  --bs-primary: #5B4BD6;
-  --bs-primary-rgb: 91, 75, 214;
-  --bs-body-bg: #F3F2FF;
-  --bs-body-color: #1B1A3B;
-  --bs-body-font-family: "Plus Jakarta Sans", sans-serif;
-  --bs-border-radius: 0.9rem;
+  --ink: #14141A;
+  --paper: #FFFFFF;
+  --sky: #D6ECFF;
+  --todo: #FFD23F;
+  --doing: #B9A4FF;
+  --done: #4FE0A0;
+  --hot: #FF5C8A;
+  --late: #FF4B4B;
+  --bw: 3px;
+  --r: 14px;
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-lg: 6px 6px 0 var(--ink);
+  --font-head: "Archivo Black", "Arial Black", Impact, sans-serif;
+
+  --bs-primary: #FF5C8A;
+  --bs-primary-rgb: 255, 92, 138;
+  --bs-body-bg: #D6ECFF;
+  --bs-body-color: #14141A;
+  --bs-body-font-family: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --bs-border-color: #14141A;
+  --bs-border-radius: 10px;
 }
+
+:focus-visible { outline: 3px solid var(--hot) !important; outline-offset: 3px; }
+
+/* ===== Títulos ===== */
+h1, .h1, .h3 { font-family: var(--font-head); font-weight: 400 !important; letter-spacing: -0.02em; line-height: 1; }
+h1.h3 { font-size: clamp(2.6rem, 6vw, 4.6rem); }
+.modal-title { font-family: var(--font-head); font-weight: 400; font-size: 1.6rem !important; line-height: 1; }
+
+/* ===== Botones ===== */
+.btn {
+  --bs-btn-border-width: var(--bw);
+  --bs-btn-border-radius: var(--r);
+  --bs-btn-font-weight: 700;
+  --bs-btn-padding-x: 1.25rem;
+  --bs-btn-padding-y: 0.6rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.1s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-lg); }
+.btn:active { transform: translate(3px, 3px) !important; box-shadow: 1px 1px 0 var(--ink) !important; }
 
 .btn-primary {
-  --bs-btn-bg: #5B4BD6;
-  --bs-btn-border-color: #5B4BD6;
-  --bs-btn-hover-bg: #4B3FC4;
-  --bs-btn-hover-border-color: #4B3FC4;
-  --bs-btn-active-bg: #4B3FC4;
+  --bs-btn-color: var(--ink);
+  --bs-btn-bg: var(--hot);
+  --bs-btn-border-color: var(--ink);
+  --bs-btn-hover-color: var(--ink);
+  --bs-btn-hover-bg: var(--hot);
+  --bs-btn-hover-border-color: var(--ink);
+  --bs-btn-active-color: var(--ink);
+  --bs-btn-active-bg: var(--hot);
+  --bs-btn-active-border-color: var(--ink);
 }
+.btn-outline-secondary {
+  --bs-btn-color: var(--ink);
+  --bs-btn-bg: var(--paper);
+  --bs-btn-border-color: var(--ink);
+  --bs-btn-hover-color: var(--ink);
+  --bs-btn-hover-bg: var(--sky);
+  --bs-btn-hover-border-color: var(--ink);
+  --bs-btn-active-color: var(--ink);
+  --bs-btn-active-bg: var(--sky);
+  --bs-btn-active-border-color: var(--ink);
+}
+.btn-close { opacity: 1; border-radius: 8px; }
+.btn-close:hover { background-color: var(--sky); }
 
-/* ===== Tarjetas (la clase "card" de Bootstrap, con tu estilo) ===== */
+/* ===== Tarjetas Bootstrap ===== */
 .card {
   padding: 1.25rem;
-  border: 0;
-  border-radius: 1.25rem;
-  box-shadow: 0 4px 18px rgba(91, 75, 214, 0.08);
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+
+/* ===== Modal ===== */
+.modal-content { border: var(--bw) solid var(--ink); border-radius: var(--r); box-shadow: 8px 8px 0 var(--ink); }
+.modal-header { border-bottom: var(--bw) solid var(--ink); }
+.modal-footer { border-top: var(--bw) solid var(--ink); }
+.modal-backdrop { --bs-backdrop-bg: #14141A; --bs-backdrop-opacity: 0.55; }
+.modal.fade .modal-dialog { transform: translateY(12px) rotate(-1deg); }
+.modal.show .modal-dialog { transform: none; }
+
+/* ===== Formularios ===== */
+.form-label { font-weight: 700; font-size: 0.95rem; }
+.form-control, .form-select { border: var(--bw) solid var(--ink); border-radius: 10px; font-weight: 500; transition: box-shadow 0.12s; }
+.form-control:focus, .form-select:focus { border-color: var(--ink); box-shadow: 4px 4px 0 var(--doing); }
+.form-control.is-invalid, .form-select.is-invalid,
+.was-validated .form-control:invalid, .was-validated .form-select:invalid { border-color: var(--late); background-image: none; padding-right: 0.75rem; }
+.form-control.is-valid, .form-select.is-valid,
+.was-validated .form-control:valid, .was-validated .form-select:valid { border-color: var(--ink); background-image: none; }
+.invalid-feedback, .text-danger { color: var(--late) !important; font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
 }

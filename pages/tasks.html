@@ -1,18 +1,26 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1 class="h3 fw-bold m-0">Tareas</h1>
+<!-- En el <head> de tu página (después de bootstrap.css):
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/board.css">
+<link rel="stylesheet" href="../css/tasks.css">
+<link rel="stylesheet" href="../css/layout.css">
+-->
+
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+  <h1 class="h3 m-0">Mis Asuntos</h1>
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#task-modal">
-    + Crear Tarea
+    + Crear tarea
   </button>
 </div>
 
-<div id="task-list" ></div>
+<div id="task-list"></div>
 
 <!-- Modal: formulario de nueva tarea -->
 <div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="task-modal-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title h5" id="task-modal-title">Nueva tarea</h2>
+        <h2 class="modal-title" id="task-modal-title">Nueva tarea</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
 
@@ -44,13 +52,13 @@
             </div>
             <div class="col-12 col-sm-6">
               <label for="status" class="form-label">Estado</label>
-              <select id="status" name="status" class="form-select"  required>
-                 <option value="" selected disabled>Selecciona un estado</option>
-                <option >Pendiente</option>
-                <option>En progreso</option>
-                <option>Completada</option>
+              <select id="status" name="status" class="form-select" required>
+                <option value="" selected disabled>Selecciona un estado</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="En progreso">En progreso</option>
+                <option value="Completada">Completada</option>
               </select>
-              <div class="invalid-feedback"></div>
+              <div class="invalid-feedback">Selecciona un estado.</div>
             </div>
           </div>
 

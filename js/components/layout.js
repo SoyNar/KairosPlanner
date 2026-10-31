@@ -17,7 +17,7 @@ export function link (active,clas) {
 export function showMenu(active)
 {
     document.getElementById("sidebar").innerHTML =
-    `<strong class="brand">Planeador</strong>${link(active, "menu-link")}`;
+    `<strong class="brand">Planeador</strong>${link(active, "menu-link")} `;
      document.getElementById("bottom-nav").innerHTML = link(active, "bottom-link")
 
 }
