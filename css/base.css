@@ -1,0 +1,25 @@
+/* ===== Colores y fuente (sobrescriben las variables de Bootstrap) ===== */
+:root {
+  --bs-primary: #5B4BD6;
+  --bs-primary-rgb: 91, 75, 214;
+  --bs-body-bg: #F3F2FF;
+  --bs-body-color: #1B1A3B;
+  --bs-body-font-family: "Plus Jakarta Sans", sans-serif;
+  --bs-border-radius: 0.9rem;
+}
+
+.btn-primary {
+  --bs-btn-bg: #5B4BD6;
+  --bs-btn-border-color: #5B4BD6;
+  --bs-btn-hover-bg: #4B3FC4;
+  --bs-btn-hover-border-color: #4B3FC4;
+  --bs-btn-active-bg: #4B3FC4;
+}
+
+/* ===== Tarjetas (la clase "card" de Bootstrap, con tu estilo) ===== */
+.card {
+  padding: 1.25rem;
+  border: 0;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 18px rgba(91, 75, 214, 0.08);
+}

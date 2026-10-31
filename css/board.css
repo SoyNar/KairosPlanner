@@ -1,0 +1,45 @@
+/* ===== Tablero por columnas ===== */
+.board {
+  display: grid;
+  grid-template-columns: 1fr;          /* móvil: columnas apiladas */
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 992px) {
+  .board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.board-col {
+  padding: 12px;
+  border-radius: 1.25rem;
+  background: rgba(91, 75, 214, 0.06);
+}
+
+.board-col--pending  { --col-color: #F59E0B; }
+.board-col--progress { --col-color: #5B4BD6; }
+.board-col--done     { --col-color: #16A34A; }
+
+.board-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 4px 8px;
+  border-bottom: 3px solid var(--col-color);
+}
+
+.board-col-title { margin: 0; font-size: 0.95rem; font-weight: 700; }
+
+.board-count {
+  min-width: 26px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.board-col-body { display: grid; gap: 12px; }
+.board-empty { margin: 8px 0; text-align: center; font-size: 0.85rem; color: #6A688F; }
