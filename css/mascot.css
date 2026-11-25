@@ -24,7 +24,7 @@
   z-index: 2000;               /* por encima del modal de Bootstrap (1055) */
   display: grid;
   place-items: center;
-  background: rgba(20, 20, 26, 0.55);
+  background: rgba(26, 26, 26, 0.45);
 }
 .kp-loader[hidden] { display: none; }
 
@@ -35,7 +35,7 @@
   background: var(--paper);
   border: var(--bw) solid var(--ink);
   border-radius: var(--r);
-  box-shadow: 8px 8px 0 var(--ink);
+  box-shadow: var(--shadow-lg);
   animation: kp-pop 0.18s ease-out;
 }
 .kp-loader__mascot { display: grid; place-items: center; }
@@ -44,7 +44,7 @@
   font-family: var(--font-head);
   font-size: 1.15rem;
 }
-@keyframes kp-pop { from { transform: translateY(10px) rotate(-1deg); opacity: 0; } }
+@keyframes kp-pop { from { transform: translateY(10px); opacity: 0; } }
 
 body.kp-loading { overflow: hidden; }
 
@@ -67,6 +67,8 @@ body.kp-loading { overflow: hidden; }
   .kai--loading .kai-stream,
   .kp-loader__box { animation: none; }
 }
+
+/* Indicador de arrastre: ahora con el acento (la lavanda era muy tenue) */
 .task-card.drop-before {
-  box-shadow: 0 -6px 0 0 var(--doing);
+  box-shadow: 0 -4px 0 0 var(--accent);
 }

@@ -1,65 +1,32 @@
-/* ============================================================
-   today.css — vista "Mi día" (estilo neobrutalista, igual que Mis Asuntos)
-   Si tu theme.css ya tiene variables de color, cambia estas
-   por las tuyas (ej: --t-pink: var(--pink);)
-   ============================================================ */
-
-.today-page {
-  --t-ink: #111114;
-  --t-pink: #ff0080;
-  --t-yellow: #ffd93d;
-  --t-purple: #c77dff;
-  --t-green: #00f5a0;
-  --t-paper: #ffffff;
-  --t-red-soft: #ffe0e6;
-  --t-border: 3px solid var(--t-ink);
-  --t-shadow: 5px 5px 0 var(--t-ink);
-  --t-shadow-hover: 8px 8px 0 var(--t-ink);
-}
-
-/* ---------- Encabezado ---------- */
+/* today.css — "Mi día" (usa los tokens de base.css) */
 
 .today-eyebrow {
-  display: inline-block;
-  background: var(--t-ink);
-  color: var(--t-pink);
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
-  padding: 0.25rem 0.7rem;
-  border-radius: 6px;
-  transform: rotate(-2deg);
-  margin-bottom: 0.5rem;
-}
-
-.today-page h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 900;
-  line-height: 1;
-  color: var(--t-ink);
+  letter-spacing: 0.14em;
 }
 
 .today-date {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--t-yellow);
-  color: var(--t-ink);
-  font-weight: 700;
-  font-size: 0.9rem;
-  padding: 0.3rem 0.9rem;
-  border: var(--t-border);
+  padding: 0.25rem 0.85rem;
+  background: var(--paper);
+  border: var(--bw) solid var(--ink);
   border-radius: 999px;
-  box-shadow: 3px 3px 0 var(--t-ink);
-  transform: rotate(-1.5deg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
 }
 
-/* ---------- Resumen (stats) ---------- */
-
+/* ---------- Resumen ---------- */
 .today-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .today-stat {
@@ -67,94 +34,77 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background: var(--t-paper);
-  border: var(--t-border);
-  border-radius: 16px;
-  box-shadow: var(--t-shadow);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  background: var(--paper);
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r);
+  transition: transform 0.12s, box-shadow 0.12s;
 }
+.today-stat:nth-child(1) { background: var(--todo); }
+.today-stat:nth-child(2) { background: var(--doing); }
+.today-stat:nth-child(3) { background: var(--done); }
 
-.today-stat:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--t-shadow-hover);
-}
-
-/* cada tarjeta lleva su color sólido */
-.today-stat:nth-child(1) { background: var(--t-yellow); }
-.today-stat:nth-child(2) { background: var(--t-purple); }
-.today-stat:nth-child(3) { background: var(--t-green); }
+.today-stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
 .today-stat-icon {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  font-size: 1.4rem;
-  color: var(--t-ink);
-  background: var(--t-paper);
-  border: var(--t-border);
+  width: 46px;
+  height: 46px;
+  font-size: 1.25rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--bw) solid var(--ink);
   border-radius: 50%;
-}
-
-/* anulamos los colores de fondo antiguos del icono */
-.today-stat-icon--pending,
-.today-stat-icon--activity,
-.today-stat-icon--done {
-  background: var(--t-paper);
 }
 
 .today-stat span {
   display: block;
-  font-size: 0.8rem;
-  font-weight: 800;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--t-ink);
+  color: var(--muted);
 }
-
 .today-stat strong {
   display: block;
-  font-size: 2.8rem;
-  font-weight: 900;
+  font-size: 2.4rem;
+  font-weight: 800;
   line-height: 1;
-  color: var(--t-ink);
+  color: var(--ink);
 }
 
-/* ---------- Títulos de sección + contadores ---------- */
-
+/* ---------- Secciones ---------- */
 .today-section h2 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--t-ink);
-  font-weight: 900;
+  font-weight: 800;
+  color: var(--ink);
 }
 
 .today-counter,
 .today-overdue-counter {
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 0.25rem 0.8rem;
-  border: var(--t-border);
+  padding: 0.2rem 0.8rem;
+  border: var(--bw) solid var(--ink);
   border-radius: 999px;
-  box-shadow: 3px 3px 0 var(--t-ink);
-  color: var(--t-ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
 }
-
-.today-counter { background: var(--t-purple); }
-
+.today-counter { background: var(--doing); }
 .today-overdue-counter {
-  background: var(--t-pink);
-  color: #fff;
+  background: var(--late-soft);
+  border-color: var(--late);
+  color: var(--late);
 }
 
 /* ---------- Agenda ---------- */
-
-.today-agenda {
+.today-agenda,
+.today-overdue {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .today-item {
@@ -163,155 +113,94 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
-  padding: 0.9rem 1.1rem 0.9rem 1.5rem;
-  background: var(--t-paper);
-  border: var(--t-border);
-  border-radius: 14px;
-  box-shadow: var(--t-shadow);
+  padding: 0.85rem 1.1rem 0.85rem 1.5rem;
+  background: var(--paper);
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r);
   overflow: hidden;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition: transform 0.12s, box-shadow 0.12s;
 }
-
-/* franja de color a la izquierda según el tipo */
 .today-item::before {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
-  width: 10px;
-  background: var(--t-yellow);
-  border-right: var(--t-border);
+  width: 6px;
+  background: var(--todo);
+  border-right: var(--bw) solid var(--ink);
 }
-
-.today-item:has(.today-tag--activity)::before { background: var(--t-purple); }
-
-.today-item:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--t-shadow-hover);
-}
+.today-item:has(.today-tag--activity)::before { background: var(--doing); }
+.today-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
 .today-item-time {
-  min-width: 78px;
+  min-width: 70px;
+  padding: 0.3rem 0.6rem;
   text-align: center;
-  font-weight: 900;
-  font-size: 1.1rem;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
-  padding: 0.45rem 0.7rem;
-  background: var(--t-ink);
-  color: var(--t-paper);
+  background: var(--sky);
+  border: var(--bw) solid var(--ink);
   border-radius: 10px;
-  transform: rotate(-2deg);
 }
 
 .today-item-content h3 {
-  margin: 0 0 0.15rem;
-  font-size: 1.15rem;
+  margin: 0 0 0.1rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  color: var(--t-ink);
+  color: var(--ink);
 }
-
-.today-item-type {
-  font-size: 0.85rem;
-  color: #555;
-}
+.today-item-type { font-size: 0.85rem; color: var(--muted); }
 
 .today-item-tag {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 0.3rem 0.9rem;
-  border: var(--t-border);
+  padding: 0.2rem 0.85rem;
+  border: var(--bw) solid var(--ink);
   border-radius: 999px;
-  color: var(--t-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink);
 }
+.today-tag--activity { background: var(--doing); }
+.today-tag--pending  { background: var(--todo); }
 
-.today-tag--activity { background: var(--t-purple); }
-.today-tag--pending  { background: var(--t-yellow); }
-
-/* ---------- Tareas vencidas ---------- */
-
-.today-overdue {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
+/* ---------- Vencidas ---------- */
 .today-overdue-item {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 0.9rem 1.1rem 0.9rem 1.8rem;
-  background: var(--t-red-soft);
-  border: var(--t-border);
-  border-radius: 14px;
-  box-shadow: 5px 5px 0 var(--t-pink);
+  padding: 0.85rem 1.1rem 0.85rem 1.5rem;
+  background: var(--late-soft);
+  border: var(--bw) solid var(--late);
+  border-radius: var(--r);
   overflow: hidden;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
-
-/* franja de "precaución" a la izquierda */
 .today-overdue-item::before {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
-  width: 14px;
-  border-right: var(--t-border);
-  background: repeating-linear-gradient(
-    -45deg,
-    var(--t-ink) 0 6px,
-    var(--t-yellow) 6px 12px
-  );
+  width: 6px;
+  background: var(--late);
 }
-
-.today-overdue-item:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 8px 8px 0 var(--t-pink);
-}
-
 .today-overdue-item h3 {
-  margin: 0 0 0.15rem;
-  font-size: 1.1rem;
+  margin: 0 0 0.1rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  color: var(--t-ink);
+  color: var(--ink);
 }
-
-.today-overdue-item span:not(.today-overdue-label) {
-  font-size: 0.85rem;
-  color: #6b2a3a;
-}
+.today-overdue-item span:not(.today-overdue-label) { font-size: 0.85rem; color: var(--late); }
 
 .today-overdue-label {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 0.3rem 0.9rem;
-  background: var(--t-pink);
+  padding: 0.2rem 0.85rem;
+  background: var(--late);
   color: #fff;
-  border: var(--t-border);
   border-radius: 999px;
-  transform: rotate(2deg);
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 /* ---------- Responsive ---------- */
-
 @media (max-width: 768px) {
-  .today-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .today-item {
-    grid-template-columns: auto 1fr;
-  }
-
-  .today-item-tag {
-    grid-column: 2;
-    justify-self: start;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .today-stat,
-  .today-item,
-  .today-overdue-item {
-    transition: none;
-  }
+  .today-summary { grid-template-columns: 1fr; }
+  .today-item { grid-template-columns: auto 1fr; }
+  .today-item-tag { grid-column: 2; justify-self: start; }
 }
