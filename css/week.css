@@ -1,0 +1,333 @@
+/* ============================================================
+   week.css — vista "Mi semana" (neobrutalista, igual que Today)
+   ============================================================ */
+
+.week-page {
+  --t-ink: #111114;
+  --t-pink: #ff0080;
+  --t-yellow: #ffd93d;
+  --t-purple: #c77dff;
+  --t-green: #00f5a0;
+  --t-paper: #ffffff;
+  --t-red-soft: #ffe0e6;
+  --t-border: 3px solid var(--t-ink);
+  --t-shadow: 5px 5px 0 var(--t-ink);
+}
+
+/* ---------- Encabezado ---------- */
+
+.week-eyebrow {
+  display: inline-block;
+  background: var(--t-ink);
+  color: var(--t-pink);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 6px;
+  transform: rotate(-2deg);
+  margin-bottom: 0.5rem;
+}
+
+.week-page h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--t-ink);
+}
+
+.week-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--t-yellow);
+  color: var(--t-ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.9rem;
+  border: var(--t-border);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--t-ink);
+  transform: rotate(-1.5deg);
+}
+
+/* ---------- Resumen ---------- */
+
+.week-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.week-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.8rem 1.25rem;
+  border: var(--t-border);
+  border-radius: 16px;
+  box-shadow: var(--t-shadow);
+  color: var(--t-ink);
+}
+
+.week-stat strong {
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.week-stat span {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.week-stat--pending { background: var(--t-yellow); }
+.week-stat--done    { background: var(--t-green); }
+.week-stat--overdue { background: var(--t-pink); color: #fff; }
+
+/* ---------- Tablero semanal ---------- */
+
+.week-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+/* En pantallas grandes, los 7 días en una sola fila */
+@media (min-width: 1400px) {
+  .week-board {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.week-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.9rem;
+  background: var(--t-paper);
+  border: var(--t-border);
+  border-radius: 16px;
+  box-shadow: var(--t-shadow);
+}
+
+/* días que ya pasaron: un poco apagados */
+.week-day--past {
+  background: #f2f2f2;
+}
+
+/* día de hoy: resaltado */
+.week-day--today {
+  background: var(--t-yellow);
+  box-shadow: 8px 8px 0 var(--t-pink);
+  transform: translateY(-4px);
+}
+
+.week-today-flag {
+  position: absolute;
+  top: -14px;
+  right: 12px;
+  background: var(--t-pink);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.6rem;
+  border: var(--t-border);
+  border-radius: 999px;
+  transform: rotate(3deg);
+}
+
+/* Cabecera del día */
+
+.week-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.week-day-name {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--t-ink);
+}
+
+.week-day-number {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--t-ink);
+}
+
+.week-day-count {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  background: var(--t-paper);
+  color: var(--t-ink);
+  border: var(--t-border);
+  border-radius: 50%;
+}
+
+/* Barra de carga del día (3 segmentos) */
+
+.week-load {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.week-load span {
+  height: 8px;
+  background: transparent;
+  border: 2px solid var(--t-ink);
+  border-radius: 4px;
+}
+
+.week-load span.is-on { background: var(--t-ink); }
+
+/* ---------- Items del día (compactos) ---------- */
+
+.week-day-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  /* si el día crece, la lista hace scroll y la columna no se estira */
+  max-height: 20rem;
+  overflow-y: auto;
+  padding: 2px 5px 5px 2px; /* espacio para que no se corten las sombras */
+  scrollbar-width: thin;
+  scrollbar-color: var(--t-ink) transparent;
+}
+
+.week-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem 0.3rem 0.95rem;
+  background: var(--t-paper);
+  border: 2px solid var(--t-ink);
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 var(--t-ink);
+  overflow: hidden;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.week-item:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--t-ink);
+}
+
+/* franja de color a la izquierda según el tipo */
+.week-item::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  border-right: 2px solid var(--t-ink);
+  background: var(--t-yellow);
+}
+
+.week-item--activity::before { background: var(--t-purple); }
+.week-item--task::before     { background: var(--t-yellow); }
+.week-item--done::before     { background: var(--t-green); }
+
+.week-item--overdue {
+  background: var(--t-red-soft);
+  box-shadow: 2px 2px 0 var(--t-pink);
+}
+
+.week-item--overdue::before {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--t-ink) 0 3px,
+    var(--t-yellow) 3px 6px
+  );
+}
+
+/* título en una sola línea; si es largo se corta con "..." */
+.week-item h3 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--t-ink);
+}
+
+.week-item--done h3 {
+  text-decoration: line-through;
+  color: #6b6b6b;
+}
+
+.week-item-time {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  padding: 0.05rem 0.35rem;
+  background: var(--t-ink);
+  color: var(--t-paper);
+  border-radius: 5px;
+}
+
+/* solo el ícono; el texto se oculta (el color de la franja ya indica el tipo) */
+.week-item-meta {
+  flex-shrink: 0;
+  font-size: 0;
+  color: #555;
+}
+
+.week-item-meta i { font-size: 0.85rem; }
+
+.week-item--overdue .week-item-meta { color: #b0003f; }
+
+/* ---------- Día vacío ---------- */
+
+.week-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1rem 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--t-ink);
+  background: #eaf5ff;
+  border: 3px dashed var(--t-ink);
+  border-radius: 12px;
+}
+
+.week-empty i { font-size: 1.5rem; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .week-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .week-day--today {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .week-item { transition: none; }
+}

@@ -1,0 +1,72 @@
+/* ===== Kai ===== */
+.kai { display: block; overflow: visible; }
+
+/* Animación de carga: la arena baja, Kai flota */
+.kai--loading { animation: kai-bob 1.6s ease-in-out infinite; }
+.kai--loading .kai-top,
+.kai--loading .kai-bottom {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.kai--loading .kai-top    { animation: kai-top 2.4s ease-in-out infinite; }
+.kai--loading .kai-bottom { animation: kai-bottom 2.4s ease-in-out infinite; }
+.kai--loading .kai-stream { animation: kai-stream 2.4s linear infinite; }
+
+@keyframes kai-bob    { 50% { transform: translateY(-6px); } }
+@keyframes kai-top    { 0% { transform: scaleY(1); }   85%, 100% { transform: scaleY(0); } }
+@keyframes kai-bottom { 0% { transform: scaleY(0.08); } 85%, 100% { transform: scaleY(1); } }
+@keyframes kai-stream { 0%, 85% { opacity: 1; } 90%, 100% { opacity: 0; } }
+
+/* ===== Overlay de carga ===== */
+.kp-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;               /* por encima del modal de Bootstrap (1055) */
+  display: grid;
+  place-items: center;
+  background: rgba(20, 20, 26, 0.55);
+}
+.kp-loader[hidden] { display: none; }
+
+.kp-loader__box {
+  min-width: 240px;
+  padding: 26px 38px 22px;
+  text-align: center;
+  background: var(--paper);
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r);
+  box-shadow: 8px 8px 0 var(--ink);
+  animation: kp-pop 0.18s ease-out;
+}
+.kp-loader__mascot { display: grid; place-items: center; }
+.kp-loader__text {
+  margin: 10px 0 0;
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+}
+@keyframes kp-pop { from { transform: translateY(10px) rotate(-1deg); opacity: 0; } }
+
+body.kp-loading { overflow: hidden; }
+
+/* ===== Mascota en el logo del menú ===== */
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand .kai { width: 22px; height: auto; }
+
+/* ===== Mascota en los estados vacíos del tablero ===== */
+.board-empty {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+.board-empty .kai { margin-bottom: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kai--loading,
+  .kai--loading .kai-top,
+  .kai--loading .kai-bottom,
+  .kai--loading .kai-stream,
+  .kp-loader__box { animation: none; }
+}
+.task-card.drop-before {
+  box-shadow: 0 -6px 0 0 var(--doing);
+}
