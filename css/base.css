@@ -1,31 +1,42 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap");
 
-/* ===== Tokens y variables de Bootstrap ===== */
+/* ===== Tokens (paleta minimalista) =====
+   Se conservan los nombres anteriores para que board, tasks, layout
+   y mascot sigan funcionando; solo cambian los valores. */
 :root {
-  --ink: #14141A;
+  --ink: #1A1A1A;
   --paper: #FFFFFF;
-  --sky: #D6ECFF;
-  --todo: #FFD23F;
-  --doing: #B9A4FF;
-  --done: #4FE0A0;
-  --hot: #FF5C8A;
-  --late: #FF4B4B;
-  --bw: 3px;
-  --r: 14px;
-  --shadow: 4px 4px 0 var(--ink);
-  --shadow-lg: 6px 6px 0 var(--ink);
+  --sky: #F6F5F2;            /* fondo de la app */
+  --muted: #6B6B6B;
+
+  --accent: #3B4CCA;         /* único color fuerte */
+  --accent-dark: #2F3EAE;
+  --accent-soft: rgba(59, 76, 202, 0.18);
+
+  --todo: #EFE9D6;           /* arena   · pendiente / tareas */
+  --doing: #E4E6F5;          /* lavanda · en progreso / actividades */
+  --done: #DDEBE3;           /* salvia  · completada */
+
+  --hot: var(--accent);      /* alias: lo que antes era rosa ahora es el acento */
+  --late: #B3402F;           /* alerta  · vencidas */
+  --late-soft: #F6E1DE;
+
+  --bw: 1.5px;
+  --r: 12px;
+  --shadow: none;
+  --shadow-lg: 0 6px 16px rgba(26, 26, 26, 0.10);
   --font-head: "Archivo Black", "Arial Black", Impact, sans-serif;
 
-  --bs-primary: #FF5C8A;
-  --bs-primary-rgb: 255, 92, 138;
-  --bs-body-bg: #D6ECFF;
-  --bs-body-color: #14141A;
+  --bs-primary: #3B4CCA;
+  --bs-primary-rgb: 59, 76, 202;
+  --bs-body-bg: #F6F5F2;
+  --bs-body-color: #1A1A1A;
   --bs-body-font-family: "Archivo", "Segoe UI", system-ui, sans-serif;
-  --bs-border-color: #14141A;
+  --bs-border-color: #1A1A1A;
   --bs-border-radius: 10px;
 }
 
-:focus-visible { outline: 3px solid var(--hot) !important; outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent) !important; outline-offset: 3px; }
 
 /* ===== Títulos ===== */
 h1, .h1, .h3 { font-family: var(--font-head); font-weight: 400 !important; letter-spacing: -0.02em; line-height: 1; }
@@ -40,22 +51,24 @@ h1.h3 { font-size: clamp(2.6rem, 6vw, 4.6rem); }
   --bs-btn-padding-x: 1.25rem;
   --bs-btn-padding-y: 0.6rem;
   box-shadow: var(--shadow);
-  transition: transform 0.1s, box-shadow 0.1s, background-color 0.1s;
+  transition: transform 0.12s, box-shadow 0.12s, background-color 0.12s;
 }
-.btn:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-lg); }
-.btn:active { transform: translate(3px, 3px) !important; box-shadow: 1px 1px 0 var(--ink) !important; }
+.btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.btn:active { transform: none !important; box-shadow: none !important; }
 
 .btn-primary {
-  --bs-btn-color: var(--ink);
-  --bs-btn-bg: var(--hot);
-  --bs-btn-border-color: var(--ink);
-  --bs-btn-hover-color: var(--ink);
-  --bs-btn-hover-bg: var(--hot);
-  --bs-btn-hover-border-color: var(--ink);
-  --bs-btn-active-color: var(--ink);
-  --bs-btn-active-bg: var(--hot);
-  --bs-btn-active-border-color: var(--ink);
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--accent-dark);
+  --bs-btn-hover-border-color: var(--accent-dark);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--accent-dark);
+  --bs-btn-active-border-color: var(--accent-dark);
 }
+.btn-primary i { color: #fff; }
+
 .btn-outline-secondary {
   --bs-btn-color: var(--ink);
   --bs-btn-bg: var(--paper);
@@ -79,17 +92,17 @@ h1.h3 { font-size: clamp(2.6rem, 6vw, 4.6rem); }
 }
 
 /* ===== Modal ===== */
-.modal-content { border: var(--bw) solid var(--ink); border-radius: var(--r); box-shadow: 8px 8px 0 var(--ink); }
+.modal-content { border: var(--bw) solid var(--ink); border-radius: var(--r); box-shadow: var(--shadow-lg); }
 .modal-header { border-bottom: var(--bw) solid var(--ink); }
 .modal-footer { border-top: var(--bw) solid var(--ink); }
-.modal-backdrop { --bs-backdrop-bg: #14141A; --bs-backdrop-opacity: 0.55; }
-.modal.fade .modal-dialog { transform: translateY(12px) rotate(-1deg); }
+.modal-backdrop { --bs-backdrop-bg: #1A1A1A; --bs-backdrop-opacity: 0.45; }
+.modal.fade .modal-dialog { transform: translateY(12px); }
 .modal.show .modal-dialog { transform: none; }
 
 /* ===== Formularios ===== */
 .form-label { font-weight: 700; font-size: 0.95rem; }
-.form-control, .form-select { border: var(--bw) solid var(--ink); border-radius: 10px; font-weight: 500; transition: box-shadow 0.12s; }
-.form-control:focus, .form-select:focus { border-color: var(--ink); box-shadow: 4px 4px 0 var(--doing); }
+.form-control, .form-select { border: var(--bw) solid var(--ink); border-radius: 10px; font-weight: 500; transition: box-shadow 0.12s, border-color 0.12s; }
+.form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .form-control.is-invalid, .form-select.is-invalid,
 .was-validated .form-control:invalid, .was-validated .form-select:invalid { border-color: var(--late); background-image: none; padding-right: 0.75rem; }
 .form-control.is-valid, .form-select.is-valid,
