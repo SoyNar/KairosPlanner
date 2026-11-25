@@ -1,0 +1,182 @@
+
+<!-- Today: estilos compartidos con Tasks -->
+<!-- En el head, después de Bootstrap CSS:
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/board.css">
+<link rel="stylesheet" href="../css/tasks.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/today.css">
+-->
+
+<section class="today-page">
+
+  <!-- Encabezado -->
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+    <div>
+      <span class="today-eyebrow">MI PLANEADOR</span>
+      <h1 class="h3 fw-bold mb-1">Mi día <i class="bi bi-sun-fill"></i></h1>
+      <p class="text-muted mb-1">
+        Organiza tus actividades y prioridades.
+      </p>
+      <span class="today-date">
+        <i class="bi bi-calendar3"></i>
+        Miércoles, 25 de noviembre
+      </span>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-lg">
+      <i class="bi bi-plus-circle-fill text-white"></i>
+      Nueva actividad
+    </button>
+
+  </div>
+
+  <!-- Resumen del día -->
+  <section class="today-summary mb-4">
+
+    <article class="today-stat">
+      <div class="today-stat-icon today-stat-icon--pending">
+        <i class="bi bi-list-task"></i>
+      </div>
+      <div>
+        <span>Tareas</span>
+        <strong>04</strong>
+      </div>
+    </article>
+
+    <article class="today-stat">
+      <div class="today-stat-icon today-stat-icon--activity">
+        <i class="bi bi-calendar-event"></i>
+      </div>
+      <div>
+        <span>Actividades</span>
+        <strong>03</strong>
+      </div>
+    </article>
+
+    <article class="today-stat">
+      <div class="today-stat-icon today-stat-icon--done">
+        <i class="bi bi-check-circle"></i>
+      </div>
+      <div>
+        <span>Completadas</span>
+        <strong>02</strong>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- Agenda de hoy -->
+  <section class="today-section mb-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h5 fw-bold m-0">
+        <i class="bi bi-calendar2-week"></i>
+        Mi agenda de hoy
+      </h2>
+
+      <span class="today-counter">07 elementos</span>
+    </div>
+
+    <div class="today-agenda">
+
+      <!-- Actividad personal -->
+      <article class="today-item">
+        <div class="today-item-time">08:00</div>
+
+        <div class="today-item-content">
+          <h3>Estudiar cálculo</h3>
+          <span class="today-item-type">
+            <i class="bi bi-book"></i>
+            Actividad personal · Estudio
+          </span>
+        </div>
+
+        <span class="today-item-tag today-tag--activity">
+          Actividad
+        </span>
+      </article>
+
+      <!-- Tarea -->
+      <article class="today-item">
+        <div class="today-item-time">10:00</div>
+
+        <div class="today-item-content">
+          <h3>Terminar proyecto</h3>
+          <span class="today-item-type">
+            <i class="bi bi-list-task"></i>
+            Tarea · Pendiente
+          </span>
+        </div>
+
+        <span class="today-item-tag today-tag--pending">
+          Pendiente
+        </span>
+      </article>
+
+      <!-- Actividad personal -->
+      <article class="today-item">
+        <div class="today-item-time">14:00</div>
+
+        <div class="today-item-content">
+          <h3>Ir al gimnasio</h3>
+          <span class="today-item-type">
+            <i class="bi bi-heart-pulse"></i>
+            Actividad personal · Ejercicio
+          </span>
+        </div>
+
+        <span class="today-item-tag today-tag--activity">
+          Actividad
+        </span>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- Tareas vencidas -->
+  <section class="today-section">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h5 fw-bold m-0">
+        <i class="bi bi-exclamation-circle"></i>
+        Tareas vencidas
+      </h2>
+
+      <span class="today-overdue-counter">02 pendientes</span>
+    </div>
+
+    <div class="today-overdue">
+
+      <article class="today-overdue-item">
+        <div>
+          <h3>Entregar documentación</h3>
+          <span>
+            <i class="bi bi-calendar-event"></i>
+            Venció el 23 de noviembre
+          </span>
+        </div>
+
+        <span class="today-overdue-label">Vencida</span>
+      </article>
+
+      <article class="today-overdue-item">
+        <div>
+          <h3>Revisar ejercicios</h3>
+          <span>
+            <i class="bi bi-calendar-event"></i>
+            Venció el 24 de noviembre
+          </span>
+        </div>
+
+        <span class="today-overdue-label">Vencida</span>
+      </article>
+
+    </div>
+
+  </section>
+
+</section>
