@@ -1,166 +1,18 @@
-<!-- Schedule: horario semanal hora por hora
-     Agrega en theme.css:  @import "../css/schedule.css";
-
-     Cada bloque se posiciona con 3 variables inline:
-       --day   = 1 (Lun) ... 7 (Dom)
-       --start = hora de inicio (24h)
-       --end   = hora de fin (24h)
-     El grid va de 6:00 a 22:00.
--->
-
 <section class="sch-page">
-
-  <!-- Encabezado -->
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-
     <div>
       <span class="sch-eyebrow">MI PLANEADOR</span>
-      <h1 class="h3 fw-bold mb-1">Mi horario <i class="bi bi-clock-fill"></i></h1>
-      <p class="text-muted mb-1">Mira de un vistazo qué tienes a cada hora.</p>
+      <h1 class="h2 fw-bold mb-1">Mi horario</h1>
+      <p class="text-muted mb-0">Una semana clara para lo que importa.</p>
     </div>
-<button
-    type="button"
-    class="btn btn-primary btn-lg"
-    data-bs-toggle="modal"
-    data-bs-target="#task-modal"
-  >
-    <i class="bi bi-plus-circle-fill text-white fs-4"></i>
-  </button>
 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#task-modal">
+      <i class="bi bi-plus"></i> Nuevo bloque
+    </button>
   </div>
 
-  <!-- Leyenda + horas por tipo -->
-  <section class="sch-legend mb-4">
-
-    <span class="sch-chip sch-chip--work">
-      <i class="bi bi-briefcase"></i> Trabajo <strong>20h</strong>
-    </span>
-
-    <span class="sch-chip sch-chip--class">
-      <i class="bi bi-mortarboard"></i> Clases <strong>07h</strong>
-    </span>
-
-    <span class="sch-chip sch-chip--study">
-      <i class="bi bi-book"></i> Estudio <strong>05h</strong>
-    </span>
-
-    <span class="sch-chip sch-chip--personal">
-      <i class="bi bi-heart-pulse"></i> Personal <strong>03h</strong>
-    </span>
-
-  </section>
-
-  <!-- Horario -->
-  <div class="sch-scroll">
-    <div class="sch-grid">
-
-      <!-- Esquina vacía -->
-      <div class="sch-corner"></div>
-
-      <!-- Encabezados de día -->
-      <div class="sch-day-head" style="--day: 1"><span>Lun</span><strong>23</strong></div>
-      <div class="sch-day-head" style="--day: 2"><span>Mar</span><strong>24</strong></div>
-      <div class="sch-day-head sch-day-head--today" style="--day: 3"><span>Mié</span><strong>25</strong></div>
-      <div class="sch-day-head" style="--day: 4"><span>Jue</span><strong>26</strong></div>
-      <div class="sch-day-head" style="--day: 5"><span>Vie</span><strong>27</strong></div>
-      <div class="sch-day-head" style="--day: 6"><span>Sáb</span><strong>28</strong></div>
-      <div class="sch-day-head" style="--day: 7"><span>Dom</span><strong>29</strong></div>
-
-      <!-- Etiquetas de hora -->
-      <div class="sch-hour" style="--h: 6">06:00</div>
-      <div class="sch-hour" style="--h: 7">07:00</div>
-      <div class="sch-hour" style="--h: 8">08:00</div>
-      <div class="sch-hour" style="--h: 9">09:00</div>
-      <div class="sch-hour" style="--h: 10">10:00</div>
-      <div class="sch-hour" style="--h: 11">11:00</div>
-      <div class="sch-hour" style="--h: 12">12:00</div>
-      <div class="sch-hour" style="--h: 13">13:00</div>
-      <div class="sch-hour" style="--h: 14">14:00</div>
-      <div class="sch-hour" style="--h: 15">15:00</div>
-      <div class="sch-hour" style="--h: 16">16:00</div>
-      <div class="sch-hour" style="--h: 17">17:00</div>
-      <div class="sch-hour" style="--h: 18">18:00</div>
-      <div class="sch-hour" style="--h: 19">19:00</div>
-      <div class="sch-hour" style="--h: 20">20:00</div>
-      <div class="sch-hour" style="--h: 21">21:00</div>
-
-      <!-- Fondo: líneas de hora y columnas de día -->
-      <div class="sch-bg" aria-hidden="true">
-        <div></div><div></div><div class="sch-bg-today"></div><div></div><div></div><div></div><div></div>
-      </div>
-
-      <!-- ===== Bloques ===== -->
-
-      <!-- Trabajo: lunes a viernes -->
-      <article class="sch-block sch-block--work" style="--day: 1; --start: 8; --end: 12">
-        <h3><i class="bi bi-briefcase"></i> Trabajo</h3>
-        <span>08:00 – 12:00</span>
-      </article>
-
-      <article class="sch-block sch-block--work" style="--day: 2; --start: 8; --end: 12">
-        <h3><i class="bi bi-briefcase"></i> Trabajo</h3>
-        <span>08:00 – 12:00</span>
-      </article>
-
-      <article class="sch-block sch-block--work" style="--day: 3; --start: 8; --end: 12">
-        <h3><i class="bi bi-briefcase"></i> Trabajo</h3>
-        <span>08:00 – 12:00</span>
-      </article>
-
-      <article class="sch-block sch-block--work" style="--day: 4; --start: 8; --end: 12">
-        <h3><i class="bi bi-briefcase"></i> Trabajo</h3>
-        <span>08:00 – 12:00</span>
-      </article>
-
-      <article class="sch-block sch-block--work" style="--day: 5; --start: 8; --end: 12">
-        <h3><i class="bi bi-briefcase"></i> Trabajo</h3>
-        <span>08:00 – 12:00</span>
-      </article>
-
-      <!-- Clases -->
-      <article class="sch-block sch-block--class" style="--day: 1; --start: 18; --end: 20">
-        <h3><i class="bi bi-mortarboard"></i> Cálculo</h3>
-        <span>18:00 – 20:00</span>
-      </article>
-
-      <article class="sch-block sch-block--class" style="--day: 2; --start: 18; --end: 20">
-        <h3><i class="bi bi-mortarboard"></i> Física</h3>
-        <span>18:00 – 20:00</span>
-      </article>
-
-      <article class="sch-block sch-block--class" style="--day: 3; --start: 18; --end: 20">
-        <h3><i class="bi bi-mortarboard"></i> Geometría vectorial</h3>
-        <span>18:00 – 20:00</span>
-      </article>
-
-      <article class="sch-block sch-block--class" style="--day: 4; --start: 18; --end: 19">
-        <h3><i class="bi bi-mortarboard"></i> Inglés</h3>
-        <span>18:00 – 19:00</span>
-      </article>
-
-      <!-- Estudio -->
-      <article class="sch-block sch-block--study" style="--day: 5; --start: 14; --end: 16">
-        <h3><i class="bi bi-book"></i> Estudiar</h3>
-        <span>14:00 – 16:00</span>
-      </article>
-
-      <article class="sch-block sch-block--study" style="--day: 6; --start: 9; --end: 12">
-        <h3><i class="bi bi-book"></i> Estudiar para el parcial</h3>
-        <span>09:00 – 12:00</span>
-      </article>
-
-      <!-- Personal -->
-      <article class="sch-block sch-block--personal" style="--day: 3; --start: 14; --end: 15">
-        <h3><i class="bi bi-heart-pulse"></i> Gimnasio</h3>
-        <span>14:00 – 15:00</span>
-      </article>
-
-      <article class="sch-block sch-block--personal" style="--day: 6; --start: 15; --end: 17">
-        <h3><i class="bi bi-cup-hot"></i> Tiempo libre</h3>
-        <span>15:00 – 17:00</span>
-      </article>
-
-    </div>
+  <div class="planner-grid">
+    <div class="planner-main" id="schedule-main"></div>
+    <aside class="planner-aside" id="planner-aside" aria-label="Panel de Kayos"></aside>
   </div>
-
 </section>

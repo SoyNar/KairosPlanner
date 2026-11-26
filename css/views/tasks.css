@@ -1,0 +1,369 @@
+/* =========================================================
+   TAREAS: tarjetas, tablero, filtros y pie de columna
+   ========================================================= */
+
+/* ===== Card de tarea ===== */
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 170px;
+  padding: 16px 18px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: none;
+  cursor: grab;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.task-card:hover {
+  box-shadow: 0 6px 16px rgba(42, 37, 54, 0.08);
+  transform: translateY(-2px);
+}
+
+.task-card:active {
+  transform: none;
+  box-shadow: none;
+}
+
+.task-card[draggable="true"] {
+  cursor: grab;
+}
+
+.task-card.is-dragging {
+  opacity: 0.4;
+  transform: rotate(2deg);
+}
+
+/* Color por estado (lo usa el badge) */
+.task-card--pending  { --status-color: var(--todo); }
+.task-card--progress { --status-color: var(--doing); }
+.task-card--done     { --status-color: var(--done); }
+
+/* ===== Parte superior: badge + basurero ===== */
+.task-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 32px;
+}
+
+.task-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--status-color, var(--todo));
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ===== Título ===== */
+.task-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* ===== Responsable (avatar + nombre) ===== */
+.task-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.task-avatar {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sky);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ===== Pie de la tarjeta: fecha + acción ===== */
+.task-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.task-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* Fechas: solo cambian de color, sin píldora */
+.task-due--today {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.task-due--late {
+  color: var(--late);
+  font-weight: 600;
+}
+
+/* ===== Botones de la tarjeta ===== */
+.task-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.1s;
+}
+
+.task-btn:hover {
+  background: var(--sky);
+  transform: none;
+}
+
+.task-btn:active {
+  transform: scale(0.96);
+}
+
+.task-btn--danger {
+  color: var(--muted);
+}
+
+.task-btn--danger:hover {
+  background: var(--late-soft);
+  color: var(--late);
+}
+
+.task-check {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--lime);
+  color: var(--dark);
+  font-size: 0.85rem;
+}
+
+.task-card--done .task-title {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  opacity: 0.55;
+}
+
+/* ===== Tablero: pie de cada columna ===== */
+.board-add {
+  margin-top: 14px;
+  padding: 8px 4px;
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+}
+.board-col--progress .board-add { color: #B5532F; }
+.board-col--done .board-add     { color: #3E7A2E; }
+
+.board-col-foot {
+  margin-top: auto;
+  padding-top: 24px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.board-col-title i {
+  font-size: 0.95rem;
+}
+
+/* ===== Vista móvil: chips de filtro ===== */
+.task-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+}
+
+.task-filter {
+  flex: 0 0 auto;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.task-filter.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.task-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== Selector de estado (formularios) ===== */
+.task-status {
+  appearance: none;
+  padding-right: 28px;
+  font-family: inherit;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%232A2536' stroke-width='2'%3E%3Cpath d='m1 1 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+/* ===== Clases heredadas (por si las usan otras vistas) ===== */
+.task-desc {
+  margin: 6px 0 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ===== Móvil: tarjetas con el mismo tamaño que en escritorio ===== */
+@media (max-width: 768px) {
+  .task-card {
+    min-height: 150px;
+    padding: 16px 18px 14px;
+  }
+
+  .task-title {
+    font-size: 1.05rem;
+  }
+}
+
+/* ===== Columnas con scroll interno ===== */
+.board-col {
+  max-height: calc(100vh - 220px);
+  min-height: 0;
+}
+
+.board-col-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-content: flex-start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+  /* Oculta la barra pero deja el scroll funcionando */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.board-col-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Las tarjetas no se aplastan: conservan su altura y el scroll las recorre */
+.board-col-body > .task-card {
+  flex-shrink: 0;
+}
+
+.task-card { min-width: 0; }
+.task-card h3,
+.task-card p { overflow-wrap: anywhere; }
+
+/* Botones Tablero / Lista usando tus tokens */
+.btn-view {
+  --bs-btn-padding-x: 0.9rem;
+  --bs-btn-padding-y: 0.42rem;
+  --bs-btn-font-size: 0.82rem;
+  --bs-btn-border-radius: 10px;
+  --bs-btn-border-color: transparent;
+  --bs-btn-bg: var(--todo);
+  --bs-btn-color: var(--muted);
+  --bs-btn-hover-bg: var(--todo);
+  --bs-btn-hover-color: var(--ink);
+  --bs-btn-hover-border-color: transparent;
+}
+
+.btn-view.is-active {
+  --bs-btn-bg: var(--dark);
+  --bs-btn-color: var(--paper);
+  --bs-btn-hover-bg: var(--dark);
+  --bs-btn-hover-color: var(--paper);
+}
+
+/* Ajuste sutil para los inputs sm de la barra de herramientas */
+.tasks-search-input {
+  width: 210px;
+  padding-top: 0.42rem;
+  padding-bottom: 0.42rem;
+  font-size: 0.82rem;
+  background-color: var(--paper);
+}
+
+.btn-outline-secondary.btn-sm,
+.form-select.form-select-sm {
+  padding-top: 0.42rem;
+  padding-bottom: 0.42rem;
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+
+.btn-outline-secondary.is-active {
+  background-color: var(--todo);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 575px) {
+  .tasks-search-input {
+    width: 100%;
+  }
+}

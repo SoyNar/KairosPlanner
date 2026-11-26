@@ -21,10 +21,10 @@
 .kp-loader {
   position: fixed;
   inset: 0;
-  z-index: 2000;               /* por encima del modal de Bootstrap (1055) */
+  z-index: 2000;
   display: grid;
   place-items: center;
-  background: rgba(26, 26, 26, 0.45);
+  background: rgba(42, 37, 54, 0.35);
 }
 .kp-loader[hidden] { display: none; }
 
@@ -33,8 +33,8 @@
   padding: 26px 38px 22px;
   text-align: center;
   background: var(--paper);
-  border: var(--bw) solid var(--ink);
-  border-radius: var(--r);
+  border: var(--bw) solid var(--line);
+  border-radius: 18px;
   box-shadow: var(--shadow-lg);
   animation: kp-pop 0.18s ease-out;
 }
@@ -42,23 +42,15 @@
 .kp-loader__text {
   margin: 10px 0 0;
   font-family: var(--font-head);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 @keyframes kp-pop { from { transform: translateY(10px); opacity: 0; } }
 
 body.kp-loading { overflow: hidden; }
 
 /* ===== Mascota en el logo del menú ===== */
-.brand { display: flex; align-items: center; gap: 8px; }
 .brand .kai { width: 22px; height: auto; }
-
-/* ===== Mascota en los estados vacíos del tablero ===== */
-.board-empty {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
-}
-.board-empty .kai { margin-bottom: 4px; }
 
 @media (prefers-reduced-motion: reduce) {
   .kai--loading,
@@ -66,9 +58,4 @@ body.kp-loading { overflow: hidden; }
   .kai--loading .kai-bottom,
   .kai--loading .kai-stream,
   .kp-loader__box { animation: none; }
-}
-
-/* Indicador de arrastre: ahora con el acento (la lavanda era muy tenue) */
-.task-card.drop-before {
-  box-shadow: 0 -4px 0 0 var(--accent);
 }

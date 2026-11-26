@@ -1,0 +1,145 @@
+/* =========================================================
+   TODAY: Vista de foco diario (usa tokens de base.css)
+   ========================================================= */
+
+/* Tarjetas métricas superiores */
+.today-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: none;
+}
+
+.today-stat__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.today-stat__value {
+  margin-top: 6px;
+  font-family: var(--font-head);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.today-stat--todo  { background: var(--todo); }
+.today-stat--doing { background: var(--doing); }
+.today-stat--done  { background: var(--done); }
+
+/* Fila de tarea del día */
+.today-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: var(--r);
+  border: var(--bw) solid var(--line);
+  background: var(--paper);
+  transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.today-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-soft);
+}
+
+/* Botón check circular */
+.today-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: transparent;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.today-check:hover {
+  background: var(--todo);
+}
+
+.today-item.is-done .today-check {
+  background: var(--done);
+  border-color: #65a30d;
+  color: #365314;
+}
+
+/* Texto de la tarea */
+.today-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.today-item__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.today-item.is-done .today-item__title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.today-item__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Badges de estado suaves */
+.today-pill {
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.today-pill--todo  { background: var(--todo);  color: var(--accent); }
+.today-pill--doing { background: var(--doing); color: #9a3412; }
+.today-pill--done  { background: var(--done);  color: #365314; }
+.today-pill--late  { background: var(--late-soft); color: var(--late); }
+
+/* Estado vacío amigable */
+.today-empty {
+  text-align: center;
+  padding: 36px 24px;
+  border-radius: 18px;
+  border: 1px dashed var(--line);
+  background: var(--paper);
+}
+
+.today-empty img {
+  width: 96px;
+  margin-bottom: 12px;
+}
+
+.today-empty h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.today-empty p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0;
+}

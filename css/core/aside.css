@@ -1,0 +1,120 @@
+/* =========================================================
+   ASIDE: tarjetas de Kayos (sin posición, la define la página)
+   ========================================================= */
+
+.planner-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.aside-card {
+  padding: 22px 24px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.aside-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.aside-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.aside-card--kayos {
+  background: var(--todo);
+  border: none;
+}
+
+.aside-card--kayos h3 {
+  font-size: 1.8rem;
+  margin-top: 14px;
+}
+
+.aside-kayos-figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 18px 0 6px;
+}
+
+.aside-kayos-figure img,
+.aside-kayos-figure svg {
+  width: 118px;
+  height: auto;
+  display: block;
+}
+
+.aside-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.aside-badge i {
+  font-size: 0.5rem;
+}
+
+.aside-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.aside-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.aside-card--hole {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--done);
+  border: none;
+}
+
+.aside-card--hole h3 {
+  font-size: 1.1rem;
+  margin: 0 0 2px;
+}
+
+.aside-card--hole p {
+  font-size: 0.85rem;
+}
+
+.aside-card--hole i {
+  font-size: 1.3rem;
+  color: var(--ink);
+}

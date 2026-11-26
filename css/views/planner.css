@@ -1,0 +1,36 @@
+/* =========================================================
+   PLANNER: rejilla de contenido principal + aside
+   ========================================================= */
+
+.planner-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(260px, 22vw, 340px);
+  gap: 24px;
+  align-items: start;
+}
+
+.planner-main {
+  min-width: 0;
+}
+
+.planner-aside {
+  position: sticky;
+  top: 28px;
+  align-self: start;
+}
+
+.planner-footnote {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+@media (max-width: 1199px) {
+  .planner-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .planner-aside {
+    position: static;
+  }
+}

@@ -1,15 +1,69 @@
-
-<div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-3">
-  <h1 class="h3 m-0">Mis Asuntos</h1>
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+  <div>
+    <span class="page-eyebrow">MENOS PENDIENTES, MÁS CALMA</span>
+    <h1 class="page-title m-0">Mis tareas</h1>
+    <p class="page-subtitle mb-0">Todo lo que tienes entre manos, en un solo lugar.</p>
+  </div>
 
   <button
     type="button"
-    class="btn btn-primary btn-lg"
+    class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#task-modal"
   >
-    <i class="bi bi-plus-circle-fill text-white fs-4"></i>
+    <i class="bi bi-plus"></i> Nueva tarea
   </button>
 </div>
 
-<div id="task-list"></div>
+<div class="planner-grid">
+  <section class="planner-main">
+
+    <!-- Barra de vista (Tablero/Lista) + Buscador y Filtros con Bootstrap -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+      
+      <!-- Izquierda: Selector Tablero / Lista + contador -->
+      <div class="d-flex align-items-center flex-wrap gap-2">
+        <div class="btn-group gap-2" role="group" aria-label="Cambiar vista">
+          <button type="button" class="btn btn-sm btn-view is-active d-inline-flex align-items-center gap-2" data-view="board">
+            <i class="bi bi-kanban"></i> Tablero
+          </button>
+          <button type="button" class="btn btn-sm btn-view d-inline-flex align-items-center gap-2" data-view="list">
+            <i class="bi bi-list-ul"></i> Lista
+          </button>
+        </div>
+
+        <span class="small fw-medium ms-2" style="color: var(--muted);" id="tasks-count">0 tareas</span>
+      </div>
+
+      <!-- Derecha: Buscador, Filtros y Ordenar -->
+      <div class="d-flex align-items-center flex-wrap gap-2">
+        <div class="position-relative">
+          <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 small" style="color: var(--muted);"></i>
+          <input
+            type="search"
+            id="tasks-search-input"
+            class="form-control form-control-sm ps-5 tasks-search-input"
+            placeholder="Buscar tareas..."
+            aria-label="Buscar tareas"
+          />
+        </div>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tasks-filter-btn">
+          Filtros
+        </button>
+
+        <select id="tasks-sort-select" class="form-select form-select-sm w-auto fw-semibold" aria-label="Ordenar tareas">
+          <option value="dueDate">Ordenar por fecha</option>
+          <option value="name">Ordenar por nombre</option>
+          <option value="status">Ordenar por estado</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div id="task-list"></div>
+<section id="tasks-progress"></section>
+  </section>
+
+  <aside class="planner-aside" id="planner-aside" aria-label="Panel de Kayos"></aside>
+</div>
