@@ -1,0 +1,129 @@
+/* ===== Botones ===== */
+.btn {
+  --bs-btn-border-width: var(--bw);
+  --bs-btn-border-radius: 12px;
+  --bs-btn-font-weight: 600;
+  --bs-btn-padding-x: 1.1rem;
+  --bs-btn-padding-y: 0.55rem;
+  box-shadow: none;
+  transition: background-color 0.15s, transform 0.12s, box-shadow 0.15s;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.btn:active { transform: none !important; box-shadow: none !important; }
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--accent-dark);
+  --bs-btn-hover-border-color: var(--accent-dark);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--accent-dark);
+  --bs-btn-active-border-color: var(--accent-dark);
+}
+.btn-primary i { color: #fff; }
+
+.btn-outline-secondary {
+  --bs-btn-color: var(--ink);
+  --bs-btn-bg: var(--paper);
+  --bs-btn-border-color: var(--line);
+  --bs-btn-hover-color: var(--ink);
+  --bs-btn-hover-bg: var(--sky);
+  --bs-btn-hover-border-color: var(--line);
+  --bs-btn-active-color: var(--ink);
+  --bs-btn-active-bg: var(--sky);
+  --bs-btn-active-border-color: var(--line);
+}
+.btn-close { opacity: 0.6; border-radius: 8px; }
+.btn-close:hover { opacity: 1; background-color: var(--sky); }
+
+/* ===== Tarjetas ===== */
+.card {
+  padding: 1.25rem;
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+/* ===== Modal ===== */
+.modal-title { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem !important; }
+.modal-content { border: var(--bw) solid var(--line); border-radius: 18px; box-shadow: var(--shadow-lg); }
+.modal-header { border-bottom: var(--bw) solid var(--line); }
+.modal-footer { border-top: var(--bw) solid var(--line); }
+.modal-backdrop { --bs-backdrop-bg: #2A2536; --bs-backdrop-opacity: 0.35; }
+.modal.fade .modal-dialog { transform: translateY(12px); }
+.modal.show .modal-dialog { transform: none; }
+
+/* ===== Formularios ===== */
+.form-label { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.form-control, .form-select {
+  border: var(--bw) solid var(--line);
+  border-radius: 12px;
+  font-weight: 500;
+  padding: 0.6rem 0.85rem;
+  transition: box-shadow 0.12s, border-color 0.12s;
+}
+.form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.form-control.is-invalid, .form-select.is-invalid,
+.was-validated .form-control:invalid, .was-validated .form-select:invalid { border-color: var(--late); background-image: none; padding-right: 0.75rem; }
+.form-control.is-valid, .form-select.is-valid,
+.was-validated .form-control:valid, .was-validated .form-select:valid { border-color: var(--line); background-image: none; }
+.invalid-feedback, .text-danger { color: var(--late) !important; font-weight: 600; }
+
+/* ===== Tarjeta de progreso ===== */
+
+/* ===== Franja oscura de progreso ===== */
+.progress-card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+  margin-top: 20px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  background: var(--dark);
+  color: #fff;
+}
+
+.progress-check {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--lime);
+  color: var(--dark);
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+
+.progress-text { flex: 1; min-width: 180px; }
+.progress-text h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #fff; }
+.progress-text p { margin: 2px 0 0; font-size: 0.9rem; opacity: 0.7; }
+
+
+.progress-pct {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--lime);
+}
+
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--lime);
+}
+

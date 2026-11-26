@@ -1,0 +1,37 @@
+/* ===== Tokens (paleta de la captura) ===== */
+:root {
+  --ink: #2A2536;
+  --paper: #FFFFFF;
+  --sky: #F7F6F2;
+  --side: #EFEBF8;
+  --muted: #8B8795;
+
+  --accent: #6B4FD8;
+  --accent-dark: #5A3FC4;
+  --accent-soft: rgba(107, 79, 216, 0.18);
+
+  --todo: #ECE8F7;
+  --doing: #FBEDE2;
+  --done: #E6F0DB;
+  --lime: #D6F28A;
+  --dark: #2B2438;
+
+  --hot: var(--accent);
+  --late: #C2452D;
+  --late-soft: #FBE3DC;
+
+  --line: #E6E2EE;
+  --bw: 1px;
+  --r: 14px;
+  --shadow: none;
+  --shadow-lg: 0 8px 24px rgba(42, 37, 54, 0.10);
+  --font-head: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --bs-primary: #6B4FD8;
+  --bs-primary-rgb: 107, 79, 216;
+  --bs-body-bg: #F7F6F2;
+  --bs-body-color: #2A2536;
+  --bs-body-font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bs-border-color: #E6E2EE;
+  --bs-border-radius: 12px;
+}

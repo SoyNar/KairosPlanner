@@ -1,5 +1,6 @@
 import { escapeHTML } from "../../utils/html.js";
 import { mascotSVG } from "../../utils/mascot.js";
+import { progressOf, renderProgressCard } from "./shared/progressCard.js";
 
 // clase css por estado
 const STATUS_CLASS = {
@@ -9,15 +10,23 @@ const STATUS_CLASS = {
 };
 const STATUSES = ["Pendiente", "En progreso", "Completada"];
 
-// cara de Kai por estado (coincide con las claves de STATUS_CLASS)
+// icono de cada columna
+const STATUS_ICON = {
+  "Pendiente": "bi-circle",
+  "En progreso": "bi-circle-half",
+  "Completada": "bi-check-lg",
+};
+
+// cara de Kai por estado
 const MOOD = {
   "Pendiente": "pending",
   "En progreso": "progress",
   "Completada": "done",
 };
 
-// true cuando la pantalla es de celular (menos de 768px)
+// true cuando la pantalla es de celular (menos de 992px)
 export const mobileQuery = window.matchMedia("(max-width: 991.98px)");
+
 // filtro activo de la vista movil: "all" o uno de STATUSES
 let activeFilter = "all";
 export function setTaskFilter(value) {
@@ -36,27 +45,51 @@ function dueInfo(dueDate, status) {
 }
 
 /**
- * metodo que recibe una tarea y devuelve el html de su card como texto
- * @param {object} t
- * @param {boolean} showStatus muestra el badge de estado (vista lista en movil)
+ * Inicial del responsable para el avatar
+ */
+function initial(name) {
+  return escapeHTML((name || "?").trim().charAt(0).toUpperCase());
+}
+
+/**
+ * Card de tarea.
+ * @param {object} t tarea
+ * @param {string|null} badge texto del badge arriba (null = sin badge)
  * @returns {string}
  */
-function taskCard(t, showStatus = false) {
+function taskCard(t, badge = null) {
   const due = dueInfo(t.dueDate, t.status);
+  const isDone = t.status === "Completada";
+
   return `
     <article class="task-card task-card--${STATUS_CLASS[t.status] ?? "pending"}"
              data-action="edit" data-id="${t.id}" tabindex="0" draggable="true">
+
+      <div class="task-top">
+        ${badge
+          ? `<span class="task-badge">${isDone ? '<i class="bi bi-check"></i> ' : ""}${escapeHTML(badge)}</span>`
+          : "<span></span>"}
+        <button type="button" class="task-btn task-btn--danger"
+                data-action="delete" data-id="${t.id}" aria-label="Eliminar">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+
       <h2 class="task-title">${escapeHTML(t.name)}</h2>
 
-      <div class="d-flex justify-content-between align-items-center gap-3">
-        <div class="task-meta">
-          ${showStatus ? `<span class="task-badge">${escapeHTML(t.status)}</span>` : ""}
-          <span><i class="bi bi-person"></i> ${escapeHTML(t.assignedTo)}</span>
-          <span class="${due.cls}"><i class="bi bi-calendar-event"></i> ${escapeHTML(due.text)}</span>
-        </div>
-        <div class="task-actions">
-          <button type="button" class="task-btn task-btn--danger" data-action="delete" data-id="${t.id}" aria-label="Eliminar"><i class="bi bi-trash"></i></button>
-        </div>
+      <div class="task-person">
+        <span class="task-avatar">${initial(t.assignedTo)}</span>
+        <span>${escapeHTML(t.assignedTo)}</span>
+      </div>
+
+      <div class="task-foot">
+        <span class="task-date ${due.cls}">
+          <i class="bi bi-clock"></i> ${escapeHTML(due.text)}
+        </span>
+        ${isDone
+          ? `<span class="task-check"><i class="bi bi-check"></i></span>`
+          : `<button type="button" class="task-btn" data-action="edit" data-id="${t.id}"
+                     aria-label="Editar tarea"><i class="bi bi-arrow-up-right"></i></button>`}
       </div>
     </article>`;
 }
@@ -102,7 +135,7 @@ function taskListView(tasks) {
     <div class="task-stack">
       ${
         visible.length
-          ? visible.map((t) => taskCard(t, true)).join("")
+          ? visible.map((t) => taskCard(t, t.status)).join("")
           : emptyState(MOOD[activeFilter] ? activeFilter : "Pendiente")
       }
     </div>`;
@@ -118,15 +151,31 @@ function taskBoardView(tasks) {
     <div class="board">
       ${STATUSES.map((status) => {
         const items = tasks.filter((t) => t.status === status);
+        const badge = status === "Completada" ? "Completada" : "Tarea";
+
         return `
           <section class="board-col board-col--${STATUS_CLASS[status]}" data-status="${status}">
             <header class="board-col-header">
-              <h2 class="board-col-title">${status}</h2>
+              <h2 class="board-col-title">
+                <i class="bi ${STATUS_ICON[status]}"></i> ${status}
+              </h2>
               <span class="board-count">${items.length}</span>
             </header>
+
             <div class="board-col-body">
-              ${items.length ? items.map((t) => taskCard(t)).join("") : emptyState(status)}
+              ${items.length
+                ? items.map((t) => taskCard(t, badge)).join("")
+                : emptyState(status)}
             </div>
+
+            <button type="button" class="board-add"
+                    data-bs-toggle="modal" data-bs-target="#task-modal">
+              <i class="bi bi-plus"></i> Añadir tarea
+            </button>
+
+            <footer class="board-col-foot">
+              ${items.length} ${items.length === 1 ? "tarea" : "tareas"}
+            </footer>
           </section>`;
       }).join("")}
     </div>`;
@@ -142,4 +191,14 @@ export function renderTasks(container, tasks) {
   container.innerHTML = mobileQuery.matches
     ? taskListView(tasks)
     : taskBoardView(tasks);
+
+    const progressEl = document.getElementById("tasks-progress");
+if (progressEl) {
+  progressEl.innerHTML = `
+    ${renderProgressCard({
+      ...progressOf(tasks),
+      title: "Progreso general.",
+    })}
+    <p class="planner-footnote">Actualizado automáticamente según el estado de tus tareas.</p>`;
+}
 }

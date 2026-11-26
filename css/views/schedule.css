@@ -1,0 +1,331 @@
+/* schedule.css — "Mi horario" (estética limpia del prototipo) */
+
+.sch-page {
+  --sch-row: 48px;
+  --sch-head: 64px;
+  --sch-hours-w: 64px;
+  --sch-border: rgba(26, 26, 26, 0.08);
+}
+
+.sch-eyebrow {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* ---------- Barra superior de fecha y vista ---------- */
+.sch-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sch-nav-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sch-month-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-right: 4px;
+}
+
+.sch-nav-arrows {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.sch-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--sch-border);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.85rem;
+}
+
+.sch-today-btn {
+  padding: 5px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--todo);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.sch-date-range,
+.sch-timezone {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.sch-view-toggle {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(26, 26, 26, 0.05);
+}
+
+.sch-toggle-btn {
+  padding: 5px 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.sch-toggle-btn.is-active {
+  background: #23112e;
+  color: #fff;
+}
+
+/* ---------- Leyenda (Chips suaves sin borde negro) ---------- */
+.sch-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.sch-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+}
+
+.sch-chip--work     { background: var(--todo);  color: #6b21a8; }
+.sch-chip--class    { background: #e0f2fe;      color: #0369a1; }
+.sch-chip--study    { background: var(--done);  color: #3f6212; }
+.sch-chip--personal { background: var(--doing); color: #9a3412; }
+
+/* ---------- Contenedor del calendario ---------- */
+.sch-scroll {
+  overflow-x: auto;
+  background: var(--paper);
+  border: 1px solid var(--sch-border);
+  border-radius: 18px;
+}
+
+.sch-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--sch-hours-w) repeat(7, minmax(105px, 1fr));
+  grid-template-rows: var(--sch-head) repeat(16, var(--sch-row));
+}
+
+/* ---------- Encabezados de día ---------- */
+.sch-corner {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--sch-border);
+}
+
+.sch-day-head {
+  grid-row: 1;
+  grid-column: calc(var(--day) + 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--sch-border);
+  border-left: 1px solid var(--sch-border);
+  color: var(--ink);
+  line-height: 1;
+}
+
+.sch-day-head span {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.sch-day-head strong {
+  font-size: 1.05rem;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sch-day-head--today span { color: var(--accent); }
+.sch-day-head--today strong {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* ---------- Horas ---------- */
+.sch-hour {
+  grid-row: calc(var(--h) - 4);
+  grid-column: 1;
+  padding: 0.35rem 0.65rem 0 0;
+  text-align: right;
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  border-top: 1px solid var(--sch-border);
+}
+
+/* ---------- Fondo ---------- */
+.sch-bg {
+  grid-row: 2 / -1;
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--sch-border) 0 1px,
+    transparent 1px var(--sch-row)
+  );
+  pointer-events: none;
+}
+
+.sch-bg > div { border-left: 1px solid var(--sch-border); }
+.sch-bg-today { background: rgba(147, 51, 234, 0.03); }
+
+/* ---------- Bloques (Tarjetas con borde izquierdo de color) ---------- */
+.sch-block {
+  grid-column: calc(var(--day) + 1);
+  grid-row: calc(var(--start) - 4) / calc(var(--end) - 4);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 4px;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  border-left: 3.5px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.sch-block:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.sch-block h3 {
+  margin: 0 0 2px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.sch-block span {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+.sch-block small {
+  font-size: 0.64rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Colores por categoría */
+.sch-block--work {
+  background: var(--todo);
+  border-left-color: var(--accent);
+  color: #581c87;
+}
+
+.sch-block--class {
+  background: #e0f2fe;
+  border-left-color: #0284c7;
+  color: #075985;
+}
+
+.sch-block--study {
+  background: var(--done);
+  border-left-color: #65a30d;
+  color: #365314;
+}
+
+.sch-block--personal {
+  background: var(--doing);
+  border-left-color: #ea580c;
+  color: #7c2d12;
+}
+
+/* ---------- Responsive (Conservando tu vista móvil) ---------- */
+@media (max-width: 991px) {
+  .sch-page { --sch-hours-w: 48px; }
+  .sch-hour { font-size: 0.6rem; padding-right: 0.3rem; }
+  .sch-day-head strong { font-size: 0.95rem; }
+  .sch-block { margin: 3px; padding: 0.35rem 0.45rem; }
+  .sch-block h3 { font-size: 0.72rem; }
+  .sch-block span { font-size: 0.62rem; }
+}
+
+@media (max-width: 767px) {
+  .sch-scroll { overflow: visible; background: transparent; border: 0; border-radius: 0; }
+  .sch-grid { display: flex; flex-direction: column; gap: 0.6rem; }
+  .sch-corner, .sch-hour, .sch-bg { display: none; }
+
+  .sch-day-head {
+    order: calc(var(--day) * 100);
+    flex-direction: row;
+    justify-content: flex-start;
+    align-self: flex-start;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+    padding: 0.35rem 0.85rem;
+    background: var(--paper);
+    border: 1px solid var(--sch-border);
+    border-radius: 12px;
+  }
+  .sch-day-head--today { border-color: var(--accent); }
+
+  .sch-block {
+    order: calc(var(--day) * 100 + var(--start));
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0.65rem 0.85rem;
+  }
+  .sch-block h3 { font-size: 0.9rem; }
+  .sch-block span { flex-shrink: 0; font-size: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sch-block { transition: none; }
+}

@@ -1,5 +1,6 @@
 
 import { ManagerTask } from "../../services/ManagerTask.js";
+import { renderAside } from "../components/task/taskAside.js";
 import {
   renderTasks,
   mobileQuery,
@@ -8,19 +9,25 @@ import {
 
 import { withLoader } from "../../utils/loader.js";
 import { validateTaskForm, showErrors } from "./taskValidation.js";
+import { loadStyle } from "../core/styles.js";
+import { setAside } from "../core/aside.js";
 
 let cleanupTasksPage = null;
 
 /**
  * Inicializa la página de tareas.
  */
-export function initTasksPage() {
+export  async function initTasksPage() {
+
 
   // Evitar listeners duplicados si se vuelve a entrar a la página
   if (cleanupTasksPage) {
     cleanupTasksPage();
     cleanupTasksPage = null;
   }
+
+  //css de la vista
+  await loadStyle("css/views/tasks.css")
 
   const controller = new AbortController();
   const { signal } = controller;
@@ -46,9 +53,11 @@ export function initTasksPage() {
   const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
 
   // Actualizar tablero
-  const refresh = () => {
-    renderTasks(list, ManagerTask.getAll());
-  };
+ const refresh = () => {
+  const tasks = ManagerTask.getAll();
+  renderTasks(list, tasks);
+  setAside(renderAside(tasks));
+};
 
   // Limpiar formulario
   function resetForm() {

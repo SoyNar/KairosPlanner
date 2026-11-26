@@ -1,0 +1,141 @@
+/* ===== Tablero por columnas ===== */
+.board {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* Pantallas medianas: dos columnas */
+@media (min-width: 768px) {
+  .board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Solo tres columnas cuando el área de contenido es amplia */
+@media (min-width: 1280px) {
+  .board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Cada columna es un bloque de color pastel */
+.board-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;           /* evita que el contenido ensanche la columna */
+  min-height: 420px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--col-color);
+}
+
+.board-col--pending  { --col-color: var(--todo); }
+.board-col--progress { --col-color: var(--doing); }
+.board-col--done     { --col-color: var(--done); }
+
+/* Encabezado: sin losa oscura, solo línea separadora */
+.board-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 0 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.board-col-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Contador: cuadrito blanco redondeado */
+.board-count {
+  min-width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  padding: 0 8px;
+  border: none;
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.board-col-body {
+  display: grid;
+  gap: 14px;
+  flex: 1;
+  align-content: start;
+}
+
+.board-empty {
+  margin: 0;
+  padding: 22px 16px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Mascota en los estados vacíos del tablero */
+.board-empty {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+.board-empty .kai { margin-bottom: 4px; }
+
+/* Filtros: píldoras suaves */
+.task-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+}
+
+.task-filter {
+  flex: 0 0 auto;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.task-filter.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.task-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Indicador de arrastre con el acento */
+.task-card.drop-before {
+  box-shadow: 0 -4px 0 0 var(--accent);
+}
+
+.board-col.is-over {
+  outline: 2px dashed var(--accent);
+  outline-offset: -6px;
+}

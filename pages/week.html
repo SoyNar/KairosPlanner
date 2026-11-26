@@ -1,228 +1,39 @@
-<!-- Week: mismo estilo que Today y Mis Asuntos
-     Agrega en theme.css:  @import "../css/week.css";
--->
-
-<section class="week-page">
-
-  <!-- Encabezado -->
-  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-
-    <div>
-      <span class="week-eyebrow">MI PLANEADOR</span>
-      <h1 class="h3 fw-bold mb-1">Mi semana <i class="bi bi-calendar-week-fill"></i></h1>
-      <p class="text-muted mb-1">Todo lo que tienes pendiente, día por día.</p>
-      <span class="week-range">
-        <i class="bi bi-calendar3"></i>
-        23 – 29 de noviembre
-      </span>
-    </div>
-
-   <button
-    type="button"
-    class="btn btn-primary btn-lg"
-    data-bs-toggle="modal"
-    data-bs-target="#task-modal"
-  >
-    <i class="bi bi-plus-circle-fill text-white fs-4"></i>
-  </button>
-
+<!-- week.html -->
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+  <div>
+    <span class="page-eyebrow">MI PLANEADOR</span>
+    <h1 class="page-title m-0">Mi semana</h1>
+    <p class="page-subtitle mb-0">Todo lo que tienes pendiente, día por día.</p>
+    <span class="week-range mt-2">
+      <i class="bi bi-calendar3"></i>
+      23 – 29 de noviembre
+    </span>
   </div>
 
-  <!-- Resumen de la semana -->
-  <section class="week-summary mb-4">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#task-modal">
+    <i class="bi bi-plus"></i> Nueva tarea
+  </button>
+</div>
 
-    <article class="week-stat week-stat--pending">
-      <strong>05</strong>
-      <span>Pendientes</span>
-    </article>
+<div class="planner-grid">
+  <section class="planner-main">
+    <div class="week-summary mb-4">
+      <article class="week-stat week-stat--pending">
+        <strong>00</strong>
+        <span>Pendientes</span>
+      </article>
+      <article class="week-stat week-stat--done">
+        <strong>00</strong>
+        <span>Completadas</span>
+      </article>
+      <article class="week-stat week-stat--overdue">
+        <strong>00</strong>
+        <span>Vencidas</span>
+      </article>
+    </div>
 
-    <article class="week-stat week-stat--done">
-      <strong>01</strong>
-      <span>Completadas</span>
-    </article>
-
-    <article class="week-stat week-stat--overdue">
-      <strong>02</strong>
-      <span>Vencidas</span>
-    </article>
-
+    <div class="week-board"></div>
   </section>
 
-  <!-- Tablero semanal -->
-  <section class="week-board">
-
-    <!-- Lunes -->
-    <article class="week-day week-day--past">
-      <header class="week-day-header">
-        <div>
-          <span class="week-day-name">Lun</span>
-          <strong class="week-day-number">23</strong>
-        </div>
-        <span class="week-day-count">1</span>
-      </header>
-
-      <div class="week-load" title="Carga del día: baja">
-        <span class="is-on"></span><span></span><span></span>
-      </div>
-
-      <div class="week-day-list">
-        <article class="week-item week-item--overdue">
-          <h3>Entregar documentación</h3>
-          <span class="week-item-meta"><i class="bi bi-exclamation-circle"></i> Vencida</span>
-        </article>
-      </div>
-    </article>
-
-    <!-- Martes -->
-    <article class="week-day week-day--past">
-      <header class="week-day-header">
-        <div>
-          <span class="week-day-name">Mar</span>
-          <strong class="week-day-number">24</strong>
-        </div>
-        <span class="week-day-count">1</span>
-      </header>
-
-      <div class="week-load" title="Carga del día: baja">
-        <span class="is-on"></span><span></span><span></span>
-      </div>
-
-      <div class="week-day-list">
-        <article class="week-item week-item--overdue">
-          <h3>Revisar ejercicios</h3>
-          <span class="week-item-meta"><i class="bi bi-exclamation-circle"></i> Vencida</span>
-        </article>
-      </div>
-    </article>
-
-    <!-- Miércoles (hoy) -->
-    <article class="week-day week-day--today">
-      <span class="week-today-flag">HOY</span>
-
-      <header class="week-day-header">
-        <div>
-          <span class="week-day-name">Mié</span>
-          <strong class="week-day-number">25</strong>
-        </div>
-        <span class="week-day-count">3</span>
-      </header>
-
-      <div class="week-load" title="Carga del día: alta">
-        <span class="is-on"></span><span class="is-on"></span><span class="is-on"></span>
-      </div>
-
-      <div class="week-day-list">
-
-        <article class="week-item week-item--activity">
-          <span class="week-item-time">08:00</span>
-          <h3>Estudiar cálculo</h3>
-          <span class="week-item-meta"><i class="bi bi-book"></i> Estudio</span>
-        </article>
-
-        <article class="week-item week-item--task">
-          <span class="week-item-time">10:00</span>
-          <h3>Terminar proyecto</h3>
-          <span class="week-item-meta"><i class="bi bi-list-task"></i> Tarea</span>
-        </article>
-
-        <article class="week-item week-item--activity">
-          <span class="week-item-time">14:00</span>
-          <h3>Ir al gimnasio</h3>
-          <span class="week-item-meta"><i class="bi bi-heart-pulse"></i> Ejercicio</span>
-        </article>
-
-      </div>
-    </article>
-
-    <!-- Jueves -->
-    <article class="week-day">
-      <header class="week-day-header">
-        <div>
-          <span class="week-day-name">Jue</span>
-          <strong class="week-day-number">26</strong>
-        </div>
-        <span class="week-day-count">1</span>
-      </header>
-
-      <div class="week-load" title="Carga del día: baja">
-        <span class="is-on"></span><span></span><span></span>
-      </div>
-
-      <div class="week-day-list">
-        <article class="week-item week-item--activity">
-          <span class="week-item-time">18:00</span>
-          <h3>Clase de inglés</h3>
-          <span class="week-item-meta"><i class="bi bi-translate"></i> Estudio</span>
-        </article>
-      </div>
-    </article>
-
-    <!-- Viernes -->
-    <article class="week-day">
-      <header class="week-day-header">
-        <div>
-          <span class="week-day-name">Vie</span>
-          <strong class="week-day-number">27</strong>
-        </div>
-        <span class="week-day-count">1</span>
-      </header>
-
-      <div class="week-load" title="Carga del día: baja">
-        <span class="is-on"></span><span></span><span></span>
-      </div>
-
-      <div class="week-day-list">
-        <article class="week-item week-item--done">
-          <h3>Tarea uno guardada</h3>
-          <span class="week-item-meta"><i class="bi bi-check-circle-fill"></i> Completada</span>
-        </article>
-      </div>
-    </article>
-
-    <!-- Sábado -->
-    <article class="week-day">
-      <header class="week-day-header">
-        <div>
-          <span class="week-day-name">Sáb</span>
-          <strong class="week-day-number">28</strong>
-        </div>
-        <span class="week-day-count">1</span>
-      </header>
-
-      <div class="week-load" title="Carga del día: baja">
-        <span class="is-on"></span><span></span><span></span>
-      </div>
-
-      <div class="week-day-list">
-        <article class="week-item week-item--task">
-          <h3>Tarea de prueba número dos</h3>
-          <span class="week-item-meta"><i class="bi bi-list-task"></i> Tarea</span>
-        </article>
-      </div>
-    </article>
-
-    <!-- Domingo (vacío) -->
-    <article class="week-day">
-      <header class="week-day-header">
-        <div>
-          <span class="week-day-name">Dom</span>
-          <strong class="week-day-number">29</strong>
-        </div>
-        <span class="week-day-count">0</span>
-      </header>
-
-      <div class="week-load" title="Carga del día: libre">
-        <span></span><span></span><span></span>
-      </div>
-
-      <div class="week-day-list">
-        <div class="week-empty">
-          <i class="bi bi-cup-hot"></i>
-          <span>Día libre</span>
-        </div>
-      </div>
-    </article>
-
-  </section>
-
-</section>
+  <aside class="planner-aside" id="planner-aside" aria-label="Panel de Kayos"></aside>
+</div>
